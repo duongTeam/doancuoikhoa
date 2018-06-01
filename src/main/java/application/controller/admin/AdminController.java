@@ -91,10 +91,6 @@ public class AdminController extends BaseController{
         return "admin/manage_order";
     }
 
-    @GetMapping(path = "/manage_news")
-    public String newsAdmin() {
-        return "admin/manage_news";
-    }
 
     @GetMapping(path = "/manage_feedback")
     public String feedbackAdmin() {
