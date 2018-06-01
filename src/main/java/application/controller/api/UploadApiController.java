@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/upload")
 public class UploadApiController {
-
     @Autowired
     FileStorageService storageService;
 
