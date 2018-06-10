@@ -72,3 +72,7 @@
 2018-May-26 21:48:59 PM [restartedMain] DEBUG application.Application - Start---
 2018-May-26 21:49:04 PM [restartedMain] DEBUG application.config.WebConfig - run defaultTemplateResolver
 2018-May-26 21:49:05 PM [restartedMain] DEBUG application.config.WebConfig - run addResourceHandlers
+2018-Jun-10 18:34:17 PM [main] DEBUG application.Application - Start---
+2018-Jun-10 18:34:18 PM [restartedMain] DEBUG application.Application - Start---
+2018-Jun-10 18:35:37 PM [main] DEBUG application.Application - Start---
+2018-Jun-10 18:35:37 PM [restartedMain] DEBUG application.Application - Start---
