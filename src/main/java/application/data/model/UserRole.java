@@ -4,8 +4,9 @@ import javax.persistence.*;
 
 @Entity(name = "tbl_userrole")
 public class UserRole {
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "userid")

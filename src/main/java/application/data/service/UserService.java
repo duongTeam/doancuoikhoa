@@ -51,6 +51,7 @@ public class UserService {
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setCreatedDate(new Date());
+            user.setUpdatedDate(new Date());
 
             //luu lai thong tin user
             userRepository.save(user);

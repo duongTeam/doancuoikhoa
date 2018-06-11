@@ -19,20 +19,20 @@ import java.util.Date;
 @Controller
 @RequestMapping("/admin")
 public class AdminMemberController {
-    @Autowired
-    private MemberService memberService;
-    @GetMapping(path = "/manage_member")
-    public String memberAdmin(Model model) {
-        model.addAttribute("listmember",memberService.findAllMembers());
-        return "admin/manage_member";
-    }
+//    @Autowired
+//    private MemberService memberService;
+//    @GetMapping(path = "/manage_member")
+//    public String memberAdmin(Model model) {
+////        model.addAttribute("listmember",memberService.findAllMembers());
+//        return "admin/manage_member";
+//    }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(
-                dateFormat, true));
-    }
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        binder.registerCustomEditor(Date.class, new CustomDateEditor(
+//                dateFormat, true));
+//    }
 
 
 

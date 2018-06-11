@@ -10,6 +10,6 @@ import javax.transaction.Transactional;
 public interface UserRoleRepository extends CrudRepository<UserRole,Integer> {
 
     @Transactional
-    @Query("select u from tbl_userrole u where u.userid = :id")
+    @Query("select u from tbl_userrole u where u.userId = :id")
     Iterable<UserRole> findRolesOfUser(@Param("id")int userId);
 }
