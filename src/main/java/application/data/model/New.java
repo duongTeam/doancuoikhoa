@@ -19,7 +19,7 @@ public class New {
     private String content;
     @Column(name = "new_link_img")
     private String img;
-    @Column(name = "created_đate")
+    @Column(name = "created_date")
     private Date createdDate;
 
     public int getNewId() {
