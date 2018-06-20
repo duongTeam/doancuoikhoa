@@ -7,27 +7,9 @@ import application.viewmodel.common.ProductVM;
 import java.util.ArrayList;
 
 public class LandingVM extends LayoutHeaderVM {
-    private LogoVM logo;
-    private ArrayList<MenuItemVM> listHrMenuItems;
     private ArrayList<MenuItemVM> listVtMenuItemsAside;
     private ArrayList<BannerVM> listBanners;
     private ArrayList<ProductVM> listProducts;
-
-    public LogoVM getLogo() {
-        return logo;
-    }
-
-    public void setLogo(LogoVM logo) {
-        this.logo = logo;
-    }
-
-    public ArrayList<MenuItemVM> getListHrMenuItems() {
-        return listHrMenuItems;
-    }
-
-    public void setListHrMenuItems(ArrayList<MenuItemVM> listHrMenuItems) {
-        this.listHrMenuItems = listHrMenuItems;
-    }
 
     public ArrayList<MenuItemVM> getListVtMenuItemsAside() {
         return listVtMenuItemsAside;
