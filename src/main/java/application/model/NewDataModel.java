@@ -1,7 +1,7 @@
 package application.model;
 
-import application.extension.CustomDateSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import application.extension.CustomDateDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ public class NewDataModel {
     private String content;
     private String img;
 
-    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date createdDate;
 
     public String getTitle() {
