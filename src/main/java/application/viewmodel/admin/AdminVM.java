@@ -1,5 +1,6 @@
 package application.viewmodel.admin;
 
+import application.data.model.Product;
 import application.model.CategoryDataModel;
 import application.viewmodel.common.ProductVM;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 
 public class AdminVM {
     private String messageTotalProducts;
+    private ArrayList<Product> listAllProducts;
     private ArrayList<ProductVM> listPagingProducts;
     private int totalPagingItems;
     private int currentPage;
@@ -51,5 +53,11 @@ public class AdminVM {
         this.listCategories = listCategories;
     }
 
+    public ArrayList<Product> getListAllProducts() {
+        return listAllProducts;
+    }
 
+    public void setListAllProducts(ArrayList<Product> listAllProducts) {
+        this.listAllProducts = listAllProducts;
+    }
 }

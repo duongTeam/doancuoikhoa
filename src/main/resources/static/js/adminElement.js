@@ -13,19 +13,22 @@ $(document).ready(function () {
     $("#input-select-img-product").change(function() {
         readURL(this);
         var formData = new FormData();
+
         NProgress.start();
         formData.append('file', $("#input-select-img-product")[0].files[0]);
         axios.post("/api/upload/upload-image", formData).then(function(res){
+
             NProgress.done();
+            console.log(dataProduct.id);
             if(res.data.success) {
                 $('#preview-product-img').attr('src', res.data.link);
-                dataProduct = {
-                    image: res.data.link
-                };
+                dataProduct.image = res.data.link;
+
             }
         }, function(err){
             NProgress.done();
-        })
+        });
+        console.log(dataProduct.id);
     });
 
     $('#datepicker-created-date-product').datetimepicker();
@@ -41,12 +44,7 @@ $(document).ready(function () {
         $("#modal-create-product").modal();
     });
 
-    // $("#modal-create-product").on('shown', function () {
-    //     dataProduct = {};
-    //     $("#preview-product-img").attr('src', '/img/default-img.png');
-    //     $("#input-product-name").val("");
-    //     $("#input-product-desc").val("");
-    // });
+
 
     $(".btn-edit-product").on("click", function () { //Ham de edit san pham
         var productInfo = $(this).data("product"); //tao 1 bien lay data cua product
@@ -62,10 +60,11 @@ $(document).ready(function () {
                 $('#input-product-price').val(res.data.data.price);
                 $('#input-product-quantity').val(res.data.data.quantity);
                 $("#product-category").val(res.data.data.category.id);
-
+                console.log(dataProduct.image);
                 var createdDate = moment(res.data.data.createdDate, "YYYY-MM-DD HH:mm:ss");
                 $('#datepicker-created-date-product').data("DateTimePicker").date(createdDate);
                 $("#modal-create-product").modal();
+                console.log(dataProduct.id);
             }
         }, function (err) {
             NProgress.done();
@@ -75,9 +74,11 @@ $(document).ready(function () {
                 'error'
             );
         })
+
     });
 
     $(".btn-save-product").on("click",function () {
+        var productInfo = $(this).data("product");
         if($("#input-product-name").val() === "" || $("#input-product-desc").val() === "" || dataProduct.image === undefined) {
             swal(
                 'Abort',
@@ -86,6 +87,7 @@ $(document).ready(function () {
             );
             return;
         }
+        console.log(dataProduct.id);
         var createdDate = null;
         if($("#datepicker-created-date-product").data("DateTimePicker").date()) {
             createdDate = $("#datepicker-created-date-product").data("DateTimePicker").date().format("YYYY-MM-DD HH:mm:ss")
@@ -96,13 +98,13 @@ $(document).ready(function () {
         dataProduct.quantity = $('#input-product-quantity').val();
         dataProduct.createdDate = createdDate;
         dataProduct.categoryId = $('#product-category').val();
+
         NProgress.start();
 
         var linkPost = "/api/product/create-product";
         if(dataProduct.id) {
             linkPost = "/api/product/update-product/" + dataProduct.id;
         }
-
         axios.post(linkPost, dataProduct).then(function(res){
             NProgress.done();
             if(res.data.success) {
@@ -131,7 +133,7 @@ $(document).ready(function () {
     });
 
     $(".btn-delete-product").on('click',function (res) {
-        var productInfo = $(this).data("product")
+        var productInfo = $(this).data("product");
         swal({
                 title: 'Are you sure?',
                 text: 'You wont be able to revert this',
@@ -170,22 +172,37 @@ $(document).ready(function () {
                 })
             }
         })
+
+    });
+
+    $('#table_id').DataTable({
+        "pagingType" : "full_numbers"
+    });
+    $('#table_id_mcb').DataTable({
+        "pagingType" : "full_numbers"
+    });
+    $('#table_id_xdttd').DataTable({
+        "pagingType" : "full_numbers"
+    });
+    $('#table_id_dcth').DataTable({
+        "pagingType" : "full_numbers"
+    });
+    $('#table_id_dcy').DataTable({
+        "pagingType" : "full_numbers"
+    });
+    $('#table_id_dcbl').DataTable({
+        "pagingType" : "full_numbers"
+    });
+    $('#table_id_gtt').DataTable({
+        "pagingType" : "full_numbers"
+    });
+});
+
+
+=======
     })
 })
 
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
 
 // function openCity(evt, cityName) {
 //     var i, tabcontent, tablinks;
@@ -200,3 +217,4 @@ function openCity(evt, cityName) {
 //     document.getElementById(cityName).style.display = "block";
 //     evt.currentTarget.className += " active";
 // }
+
