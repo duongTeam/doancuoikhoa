@@ -23,6 +23,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -252,6 +254,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content-wrapper">
         <section class="content">
             <h2 style="padding: 15px">Admin- News Page</h2>
+            <p><button class="btn btn-default btn-create-news">Thêm mới tin tức</button></p>
 
             <div class="tab-content">
                 <div class="active tab-pane" id="all">
@@ -270,49 +273,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         </tbody>
                     </table>
-                    <div class="box box-primary" style="display: none">
-                        <form  id="form-edit-news"   method="POST" enctype="multipart/form-data">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Viêt bài mới</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label>Tiêu đề</label>
-                                    <input type="text" class="form-control" name="title" placeholder="Tiêu đề" required>
+                    <div id="modal-create-news" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Tin tức mới</h4>
                                 </div>
-
-                                <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px" name="content" required>
-
-                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <div class="btn btn-default btn-file">
-                                        <i class="fa fa-paperclip"></i> Hình ảnh
-                                        <input type="file" name="img" required>
+                                <div class="modal-body">
+                                    <div class="img-select-block margin-bottom-15">
+                                        <label>Ảnh</label>
+                                        <br/>
+                                        <img id="preview-news-img" th:src="@{/img/default-img.png}" />
+                                        <input type="file" id="input-select-img-news"/>
                                     </div>
-                                    <p class="help-block">Max. 8MB</p>
-                                </div>
-                                <div class="form-group">
-                                    <label>Ngày tạo: </label>
-                                    <div class='input-group date' id='datepicker-created-date-product'>
-                                        <input type="text" class="form-control"/>
-                                        <span class="input-group-addon">
+
+                                    <div class="form-group margin-bottom-15">
+                                        <label>Tiêu đề </label>
+                                        <input type="text" class="form-control" id="input-news-title">
+                                    </div>
+
+
+
+                                    <div class="form-group margin-bottom-15">
+                                        <label>Nội dung </label>
+                                        <textarea type="text" class="form-control" id="input-news-content"></textarea>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label>Giờ đăng </label>
+                                        <div class='input-group date' id='datepicker-created-date-news'>
+                                            <input type="text" class="form-control"/>
+                                            <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
                             </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <div class="pull-right">
-                                    <button type="submit" th:value="Submit"  class="btn btn-primary"><i class="fa fa-pencil"></i> Send</button>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-success btn-save-news">Lưu tin tức</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                                 </div>
-                                <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
                             </div>
-                            <!-- /.box-footer -->
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -333,9 +338,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" th:src="@{/plugins/chart.js/Chart.js}"></script>
 <script type="text/javascript" th:src="@{/dist/js/dashboard.js}"></script>
 <script type="text/javascript" th:src="@{/dist/js/demo.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/vi.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+
 
 <script th:src="@{/js/news.js}"></script>
 

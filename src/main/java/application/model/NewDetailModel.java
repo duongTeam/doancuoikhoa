@@ -11,7 +11,7 @@ public class NewDetailModel {
     private String content;
     private String img;
 
-//    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createdDate;
 
     public int getNewId() {
