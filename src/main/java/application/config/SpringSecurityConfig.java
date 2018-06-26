@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -33,10 +34,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         logger.info("----configure(HttpSecurity http)");
 
+        //ten role phai dat ten trong DB la ROLE_ADMIN, ROLE_SUPPADMIN, ROLE_USER
         http.authorizeRequests()
-                .antMatchers("/","/home","/register-user","/about","/product/**").permitAll()
+                .antMatchers("/","/home","/register-user","/about","/product/**","/api/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/user/**","/cart").hasAnyRole("USER")
+                .antMatchers("/user/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
@@ -55,7 +57,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/resources/**")
                 .antMatchers("/static/**")
-                .antMatchers("/public/**");
+                .antMatchers("/public/**")
+                .antMatchers("/img/**")
+                .antMatchers("/uploaded/**")
+                .antMatchers(HttpMethod.POST, "/api/**");
     }
 
     @Autowired

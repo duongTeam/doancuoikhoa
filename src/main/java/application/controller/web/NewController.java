@@ -19,27 +19,27 @@ import org.springframework.web.client.HttpClientErrorException;
 @Controller
 @RequestMapping(path = "/new")
 public class NewController extends BaseController {
-    @Autowired
-    private ProductService productService;
-
-    @GetMapping("/detail/{productid}")
-    public String index (Model model, @PathVariable int productId, @CookieValue("current-page") String currentPageCookie) {
-        System.out.println("-------------");
-        System.out.println(currentPageCookie);
-
-        ProductIndexVM vm = new ProductIndexVM();
-
-        Product existProduct = productService.findOne(productId);
-        if(existProduct != null) {
-            ModelMapper modelMapper = new ModelMapper();
-            ProductDetailModel productDetailModel = modelMapper.map(existProduct,ProductDetailModel.class);
-            vm.setInfo(productDetailModel);
-
-            this.setLayoutHeaderVM(vm);
-            model.addAttribute("vm",vm);
-            return "product/index";
-        }else {
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @Autowired
+//    private ProductService productService;
+//
+//    @GetMapping("/detail/{productid}")
+//    public String index (Model model, @PathVariable int productId, @CookieValue("current-page") String currentPageCookie) {
+//        System.out.println("-------------");
+//        System.out.println(currentPageCookie);
+//
+//        ProductIndexVM vm = new ProductIndexVM();
+//
+//        Product existProduct = productService.findOne(productId);
+//        if(existProduct != null) {
+//            ModelMapper modelMapper = new ModelMapper();
+//            ProductDetailModel productDetailModel = modelMapper.map(existProduct,ProductDetailModel.class);
+//            vm.setInfo(productDetailModel);
+//
+//            this.setLayoutHeaderVM(vm);
+//            model.addAttribute("vm",vm);
+//            return "product/index";
+//        }else {
+//            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+//        }
+//    }
 }

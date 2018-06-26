@@ -12,6 +12,9 @@ public class LandingVM extends LayoutHeaderVM {
     private ArrayList<MenuItemVM> listVtMenuItemsAside;
     private ArrayList<BannerVM> listBanners;
     private ArrayList<ProductVM> listProducts;
+    private ArrayList<ProductVM> listHotProducts;
+    private ArrayList<ProductVM> listTrendProducts;
+    private ArrayList<ProductVM> listNewProducts;
 
     public LogoVM getLogo() {
         return logo;
@@ -51,5 +54,29 @@ public class LandingVM extends LayoutHeaderVM {
 
     public void setListProducts(ArrayList<ProductVM> listProducts) {
         this.listProducts = listProducts;
+    }
+
+    public ArrayList<ProductVM> getListHotProducts() {
+        return listHotProducts;
+    }
+
+    public void setListHotProducts(ArrayList<ProductVM> listHotProducts) {
+        this.listHotProducts = listHotProducts;
+    }
+
+    public ArrayList<ProductVM> getListTrendProducts() {
+        return listTrendProducts;
+    }
+
+    public void setListTrendProducts(ArrayList<ProductVM> listTrendProducts) {
+        this.listTrendProducts = listTrendProducts;
+    }
+
+    public ArrayList<ProductVM> getListNewProducts() {
+        return listNewProducts;
+    }
+
+    public void setListNewProducts(ArrayList<ProductVM> listNewProducts) {
+        this.listNewProducts = listNewProducts;
     }
 }

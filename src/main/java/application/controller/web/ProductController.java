@@ -22,7 +22,7 @@ public class ProductController extends BaseController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/detail/{productid}")
+    @GetMapping("/detail/{productId}")
     public String index (Model model, @PathVariable int productId, @CookieValue("current-page") String currentPageCookie) {
         System.out.println("-------------");
         System.out.println(currentPageCookie);

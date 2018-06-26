@@ -26,13 +26,13 @@ public class UserController {
     @GetMapping(path = "/register-user")
     public String register(Model model) {
         model.addAttribute("user",new User());
-        return "/register";
+        return "/login";
     }
 
     @RequestMapping(path = "/register-user", method = RequestMethod.POST)
     public String registerNewUser(@Valid @ModelAttribute("user")User user, BindingResult result) {
         logger.info("registerNewUser: ");
         StatusRegisterUserEnum statusRegisterUserEnum = userService.registerNewUser(user);
-        return "redirect:/";
+        return "redirect:/home";
     }
 }
