@@ -21,7 +21,7 @@ package application.controller.api;
  * Created by ManhNguyen on 3/1/18.
  */
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/new")
 public class NewApiController {
 
 //    @Autowired
@@ -152,5 +152,29 @@ public class NewApiController {
 //
 //        return result;
 //    }
+
+
+    @GetMapping("/getall")
+    public BaseApiResult getAll(){
+        DataApiResult result = new DataApiResult();
+        ModelMapper modelMapper = new ModelMapper();
+
+        try {
+            ArrayList<New> news = new ArrayList<>();
+            ArrayList<NewDetailModel> newDetailModels = new ArrayList<>();
+            news = newService.getAll();
+            for(New n : news){
+                newDetailModels.add(modelMapper.map(n,NewDetailModel.class));
+            }
+            result.setMessage("success");
+            result.setData(newDetailModels);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setData(null);
+            result.setMessage(e.getMessage());
+        }
+        return result;
+    }
 
 }

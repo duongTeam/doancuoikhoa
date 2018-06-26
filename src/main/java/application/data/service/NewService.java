@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -69,5 +70,9 @@ public class NewService {
             logger.error(e.getMessage());
         }
         return false;
+    }
+
+    public ArrayList<New> getAll(){
+        return newRepository.getAll();
     }
 }

@@ -1,6 +1,8 @@
 package application.config;
 
 import application.data.service.CategoryService;
+
+import application.data.service.NewService;
 import application.data.service.ProductService;
 import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.apache.logging.log4j.LogManager;
@@ -24,6 +26,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     private static final Logger logger = LogManager.getLogger(WebConfig.class);
+
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
@@ -54,7 +57,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new CategoryService();
     }
 
-    @Override
+//    @Bean
+//    public MemberService getMemberService() {
+//        return new MemberService();
+//    }
+
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         logger.debug("run addResourceHandlers");
 
