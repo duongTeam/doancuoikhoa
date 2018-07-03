@@ -37,7 +37,7 @@ $(document).ready(function () {
                             <td>${news.newId}</td>
                             <td>${news.title}</td>
                             <td>${news.content}</td>
-                            <td><img src="${news.img}" alt="không hiểu"></td>
+                            <td><img src="${news.img}" alt="không hiểu" style="width:250px; height:250px;"></td>
                             <td>${news.createdDate}</td>
                             <td><button class="btn btn-default btn-edit-news" data-id="${news.newId}">Sửa</button> <button class="btn btn-danger btn-remove-news" data-id="${news.newId}">Xóa</button></td>
                         </tr>
