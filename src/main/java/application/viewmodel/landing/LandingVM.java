@@ -1,18 +1,37 @@
 package application.viewmodel.landing;
 
+import application.data.model.Category;
+import application.data.model.Product;
+import application.data.model.User;
+import application.model.UserDataModel;
 import application.viewmodel.common.LayoutHeaderVM;
 import application.viewmodel.common.LogoVM;
 import application.viewmodel.common.ProductVM;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LandingVM extends LayoutHeaderVM {
+    private ArrayList<MenuItemVM> listHrMenuItems;
     private ArrayList<MenuItemVM> listVtMenuItemsAside;
     private ArrayList<BannerVM> listBanners;
-    private ArrayList<ProductVM> listProducts;
-    private ArrayList<ProductVM> listHotProducts;
-    private ArrayList<ProductVM> listTrendProducts;
-    private ArrayList<ProductVM> listNewProducts;
+    private LogoVM logo;
+
+    public LogoVM getLogo() {
+        return logo;
+    }
+
+    public void setLogo(LogoVM logo) {
+        this.logo = logo;
+    }
+
+    public ArrayList<MenuItemVM> getListHrMenuItems() {
+        return listHrMenuItems;
+    }
+
+    public void setListHrMenuItems(ArrayList<MenuItemVM> listHrMenuItems) {
+        this.listHrMenuItems = listHrMenuItems;
+    }
 
     public ArrayList<MenuItemVM> getListVtMenuItemsAside() {
         return listVtMenuItemsAside;
@@ -30,35 +49,23 @@ public class LandingVM extends LayoutHeaderVM {
         this.listBanners = listBanners;
     }
 
-    public ArrayList<ProductVM> getListProducts() {
-        return listProducts;
+    private List<Category> categoryList;
+
+    public List<Category> getCategoryList() {
+        return categoryList;
     }
 
-    public void setListProducts(ArrayList<ProductVM> listProducts) {
-        this.listProducts = listProducts;
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 
-    public ArrayList<ProductVM> getListHotProducts() {
-        return listHotProducts;
+    private User user;
+
+    public User getUser() {
+        return user;
     }
 
-    public void setListHotProducts(ArrayList<ProductVM> listHotProducts) {
-        this.listHotProducts = listHotProducts;
-    }
-
-    public ArrayList<ProductVM> getListTrendProducts() {
-        return listTrendProducts;
-    }
-
-    public void setListTrendProducts(ArrayList<ProductVM> listTrendProducts) {
-        this.listTrendProducts = listTrendProducts;
-    }
-
-    public ArrayList<ProductVM> getListNewProducts() {
-        return listNewProducts;
-    }
-
-    public void setListNewProducts(ArrayList<ProductVM> listNewProducts) {
-        this.listNewProducts = listNewProducts;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

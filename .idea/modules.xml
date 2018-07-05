@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Documents-doancuoikhoa.iml" filepath="$PROJECT_DIR$/.idea/modules/Documents-doancuoikhoa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Documents-doancuoikhoa_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Documents-doancuoikhoa_main.iml" group="doancuoikhoa" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Documents-doancuoikhoa_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Documents-doancuoikhoa_test.iml" group="doancuoikhoa" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitHub-doancuoikhoa.iml" filepath="$PROJECT_DIR$/.idea/modules/GitHub-doancuoikhoa.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitHub-doancuoikhoa_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GitHub-doancuoikhoa_main.iml" group="doancuoikhoa" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitHub-doancuoikhoa_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GitHub-doancuoikhoa_test.iml" group="doancuoikhoa" />

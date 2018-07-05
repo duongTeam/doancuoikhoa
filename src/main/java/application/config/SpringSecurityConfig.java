@@ -36,12 +36,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //ten role phai dat ten trong DB la ROLE_ADMIN, ROLE_SUPPADMIN, ROLE_USER
         http.authorizeRequests()
-                .antMatchers("/","/home","/register-user","/about","/product/**","/api/**").permitAll()
+                .antMatchers("/","/register-user","/about","/product/**","/api/**"
+                        ,"/signin/**","/signup/**","/link/**","/list-products/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("USER")
+                .antMatchers().hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin().loginPage("/login").defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
@@ -59,6 +60,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/static/**")
                 .antMatchers("/public/**")
                 .antMatchers("/img/**")
+                .antMatchers("/plugins/**")
                 .antMatchers("/uploaded/**")
                 .antMatchers(HttpMethod.POST, "/api/**");
     }
