@@ -31,10 +31,20 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "image")
+    private String image;
+
     public User() {
     }
 
-    public User(String username, String password, String realname, Date createdDate, Date updatedDate, String email, String phone) {
+    public User(String username, String password, String realname, Date createdDate, Date updatedDate, String email,
+                String phone, String gender, String address, String image) {
         this.username = username;
         this.password = password;
         this.realname = realname;
@@ -42,6 +52,9 @@ public class User {
         this.updatedDate = updatedDate;
         this.email = email;
         this.phone = phone;
+        this.gender = gender;
+        this.address = address;
+        this.image = image;
     }
 
     public int getId() {
@@ -106,5 +119,29 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

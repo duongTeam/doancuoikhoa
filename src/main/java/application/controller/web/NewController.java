@@ -21,7 +21,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping(path = "/news")
+@RequestMapping(path = "/new")
 public class NewController extends BaseController {
 
     @Autowired

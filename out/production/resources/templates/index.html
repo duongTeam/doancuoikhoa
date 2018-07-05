@@ -23,13 +23,12 @@
 
     <div class="list-group col-sm-3">
         <a href="#" class="list-group-item active">Danh mục sản phẩm</a>
-        <a href="#" class="list-group-item">Máy chạy bộ điện</a>
-        <a href="#" class="list-group-item">Xe đạp tập thể dục</a>
-        <a href="#" class="list-group-item">Dụng cụ thể hình</a>
-        <a href="#" class="list-group-item">Dụng cụ Yoga thẩm mỹ</a>
-        <a href="#" class="list-group-item">Dụng cụ bơi lội</a>
-        <a href="#" class="list-group-item">Giày thể thao</a>
-        <a href="#" class="list-group-item">Dụng cụ võ thuật</a>
+        <a th:href="@{/list-products/1}" class="list-group-item">Máy chạy bộ</a>
+        <a th:href="@{~/list-products/2}" class="list-group-item">Xe đạp tập thể dục</a>
+        <a th:href="@{~/list-products/3}" class="list-group-item">Dụng cụ thể hình</a>
+        <a th:href="@{~/list-products/4}" class="list-group-item">Dụng cụ Yoga thẩm mỹ</a>
+        <a th:href="@{~/list-products/5}" class="list-group-item">Dụng cụ bơi lội</a>
+        <a th:href="@{~/list-products/6}" class="list-group-item">Giày thể thao</a>
     </div>
 
 
@@ -68,27 +67,22 @@
     </div>
 
 </div>
-<div class="container"  style="padding-top:30px;">
-    <div class="content-wrap wow fadeInUpBig" data-wow-duration="1s">
+
+<div class="container"  style="padding-top:30px;" >
+    <div class="content-wrap wow fadeInUpBig" data-wow-duration="1s" th:each="category : ${vm.getCategoryList()}">
         <div class="menu-big clearfix">
-            <h2 class="title18 col-sm-4">MÁY CHẠY BỘ</h2>
-            <div class="list-big clearfix">
-                <ul class="list-none col-sm-8">
-                    <li><a href=""><span>Máy chạy bộ điện</span></a></li>
-                    <li><a href=""><span>Máy chạy bộ phòng tập gym</span></a></li>
-                    <li><a href=""><span>Máy chạy bộ điện</span></a></li>
-                </ul>
-            </div>
+            <h2 class="title18 col-sm-4" th:text="${category.getName()}" style="text-transform: uppercase"></h2>
         </div>
         <div class="big-box cleatfix">
             <div class="box-left col-sm-8">
                 <div class="big-banner">
                     <div class="banner-box">
-                        <a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2016/12/baner-chinh-may-chay-bo.jpg" alt=""></a>
+                        <a href="">
+                            <img src="https://sportonline.com.vn/wp-content/uploads/2016/12/baner-chinh-may-chay-bo.jpg" alt="">
+                        </a>
                     </div>
                 </div>
-                <div class="sanpham sanpham1"
-                     th:each="product : ${vm.getListHotProducts()}" th:if="${product.getCategory().getId() == 1}">
+                <div class="sanpham sanpham1" th:each="product,iter : ${category.getProducts().get(0)}">
                     <div class="box-right-right col-sm-6">
                         <div class="item-product__image">
                             <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
@@ -99,14 +93,14 @@
                     <div class="box-right-left col-sm-6">
                         <div class="product-info">
                             <h3 class="product-title">
-                                <a th:href="@{'product/detail' + ${product.getId()}}">
+                                <a th:href="@{'product/detail/' + ${product.getId()}}">
                                     <span th:text="${product.getName()}"></span>
                                 </a>
                             </h3>
                             <div class="price-sale">
                                 <div class="product-price">
                                     <del>
-                                        <span>20.800.000</span>
+                                        <span>20.800.000đ</span>
                                     </del>
                                     <span class="sale-off5">-18%</span>
                                     <br>
@@ -128,31 +122,157 @@
                     </div>
                 </div>
 
-                <div class="sanpham sanpham1" th:each="product : ${vm.getListTrendProducts()}"
-                     th:if="${product.getCategory().getId() == 1}">
+                <div class="sanpham sanpham1" th:each="product,iter : ${category.getProducts().get(1)}">
+                    <div class="box-right-right col-sm-6">
+                        <div class="item-product__image">
+                            <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
+                                <img th:src="${product.getImage()}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-right-left col-sm-6">
+                        <div class="product-info">
+                            <h3 class="product-title">
+                                <a th:href="@{'product/detail/' + ${product.getId()}}">
+                                    <span th:text="${product.getName()}"></span>
+                                </a>
+                            </h3>
+                            <div class="price-sale">
+                                <div class="product-price">
+                                    <del>
+                                        <span>20.800.000đ</span>
+                                    </del>
+                                    <span class="sale-off5">-18%</span>
+                                    <br>
+                                    <ins class="after-sale">
+                                        <span th:text="${product.getPrice()}"></span>
+                                        <span>đ</span>
+                                    </ins>
+                                </div>
+                            </div>
+                            <div class="product-rate">
+                                <div class="product-rating" style="with:100%;"></div>
+                            </div>
+                            <div class="product-extra-link">
+                                <a class="add-to-cart" th:href="@{/cart}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sanpham sanpham1" th:each="product,iter : ${category.getProducts().get(2)}">
+                    <div class="box-right-right col-sm-6">
+                        <div class="item-product__image">
+                            <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
+                                <img th:src="${product.getImage()}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-right-left col-sm-6">
+                        <div class="product-info">
+                            <h3 class="product-title">
+                                <a th:href="@{'product/detail/' + ${product.getId()}}">
+                                    <span th:text="${product.getName()}"></span>
+                                </a>
+                            </h3>
+                            <div class="price-sale">
+                                <div class="product-price">
+                                    <del>
+                                        <span>20.800.000đ</span>
+                                    </del>
+                                    <span class="sale-off5">-18%</span>
+                                    <br>
+                                    <ins class="after-sale">
+                                        <span th:text="${product.getPrice()}"></span>
+                                        <span>đ</span>
+                                    </ins>
+                                </div>
+                            </div>
+                            <div class="product-rate">
+                                <div class="product-rating" style="with:100%;"></div>
+                            </div>
+                            <div class="product-extra-link">
+                                <a class="add-to-cart" th:href="@{/cart}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sanpham sanpham1" th:each="product,iter : ${category.getProducts().get(3)}">
+                    <div class="box-right-right col-sm-6">
+                        <div class="item-product__image">
+                            <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
+                                <img th:src="${product.getImage()}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-right-left col-sm-6">
+                        <div class="product-info">
+                            <h3 class="product-title">
+                                <a th:href="@{'product/detail/' + ${product.getId()}}">
+                                    <span th:text="${product.getName()}"></span>
+                                </a>
+                            </h3>
+                            <div class="price-sale">
+                                <div class="product-price">
+                                    <del>
+                                        <span>20.800.000đ</span>
+                                    </del>
+                                    <span class="sale-off5">-18%</span>
+                                    <br>
+                                    <ins class="after-sale">
+                                        <span th:text="${product.getPrice()}"></span>
+                                        <span>đ</span>
+                                    </ins>
+                                </div>
+                            </div>
+                            <div class="product-rate">
+                                <div class="product-rating" style="with:100%;"></div>
+                            </div>
+                            <div class="product-extra-link">
+                                <a class="add-to-cart" th:href="@{/cart}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-right col-sm-4">
+                <div class="sanpham" th:each="product : ${category.getProducts().get(4)}">
                     <div class="box-right-right col-sm-6">
                         <div class="box-right-right col-sm-6">
-                            <div class="item-product__image">
-                                <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
-                                    <img th:src="${product.getImage()}" alt="">
+                            <div class="box-right-right col-sm-6">
+                                <div class="item-product__image">
+                                    <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
+                                        <img th:src="${product.getImage()}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-right-left col-sm-6">
+                        <div class="product-info">
+                            <h3 class="product-title">
+                                <a th:href="@{'product/detail/' + ${product.getId()}}">
+                                    <span th:text="${product.getName()}"></span>
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
                             </h3>
                             <div class="price-sale">
                                 <div class="product-price">
                                     <del>
-                                        <span>20.800.000 đ</span>
-
+                                        <span>20.800.000đ</span>
                                     </del>
                                     <span class="sale-off5">-18%</span>
+                                    <br>
                                     <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
+                                        <span th:text="${product.getPrice()}"></span>
+                                        <span>đ</span>
                                     </ins>
                                 </div>
                             </div>
@@ -160,29 +280,43 @@
                                 <div class="product-rating" style="with:100%;"></div>
                             </div>
                             <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" th:href="@{/cart}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
                                 <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
                                 <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="sanpham sanpham1">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
+
+                <div class="sanpham" th:each="product : ${category.getProducts().get(5)}">
+                    <div class="box-right-right col-sm-6">
+                        <div class="box-right-right col-sm-6">
+                            <div class="box-right-right col-sm-6">
+                                <div class="item-product__image">
+                                    <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
+                                        <img th:src="${product.getImage()}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="box-right-left col-sm-6">
                         <div class="product-info">
                             <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
+                                <a th:href="@{'product/detail/' + ${product.getId()}}">
+                                    <span th:text="${product.getName()}"></span>
+                                </a>
                             </h3>
                             <div class="price-sale">
                                 <div class="product-price">
                                     <del>
-                                        <span>20.800.000 đ</span>
-
+                                        <span>20.800.000đ</span>
                                     </del>
                                     <span class="sale-off5">-18%</span>
+                                    <br>
                                     <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
+                                        <span th:text="${product.getPrice()}"></span>
+                                        <span>đ</span>
                                     </ins>
                                 </div>
                             </div>
@@ -190,7 +324,7 @@
                                 <div class="product-rating" style="with:100%;"></div>
                             </div>
                             <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" th:href="@{/cart}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
                                 <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
                                 <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
                             </div>
@@ -198,24 +332,35 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="box-right col-sm-4">
-                <div class="sanpham">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
+                <div class="sanpham" th:each="product : ${category.getProducts().get(6)}">
+                    <div class="box-right-right col-sm-6">
+                        <div class="box-right-right col-sm-6">
+                            <div class="box-right-right col-sm-6">
+                                <div class="item-product__image">
+                                    <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
+                                        <img th:src="${product.getImage()}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="box-right-left col-sm-6">
                         <div class="product-info">
                             <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
+                                <a th:href="@{'product/detail/' + ${product.getId()}}">
+                                    <span th:text="${product.getName()}"></span>
+                                </a>
                             </h3>
                             <div class="price-sale">
                                 <div class="product-price">
                                     <del>
-                                        <span>20.800.000 đ</span>
-
+                                        <span>20.800.000đ</span>
                                     </del>
                                     <span class="sale-off5">-18%</span>
+                                    <br>
                                     <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
+                                        <span th:text="${product.getPrice()}"></span>
+                                        <span>đ</span>
                                     </ins>
                                 </div>
                             </div>
@@ -223,29 +368,43 @@
                                 <div class="product-rating" style="with:100%;"></div>
                             </div>
                             <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" th:href="@{/cart}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
                                 <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
                                 <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="sanpham">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
+
+                <div class="sanpham" th:each="product : ${category.getProducts().get(7)}">
+                    <div class="box-right-right col-sm-6">
+                        <div class="box-right-right col-sm-6">
+                            <div class="box-right-right col-sm-6">
+                                <div class="item-product__image">
+                                    <a class="item-product__img__link" th:href="@{'product/detail/' + ${product.getId()}}">
+                                        <img th:src="${product.getImage()}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="box-right-left col-sm-6">
                         <div class="product-info">
                             <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
+                                <a th:href="@{'product/detail/' + ${product.getId()}}">
+                                    <span th:text="${product.getName()}"></span>
+                                </a>
                             </h3>
                             <div class="price-sale">
                                 <div class="product-price">
                                     <del>
-                                        <span>20.800.000 đ</span>
-
+                                        <span>20.800.000đ</span>
                                     </del>
                                     <span class="sale-off5">-18%</span>
+                                    <br>
                                     <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
+                                        <span th:text="${product.getPrice()}"></span>
+                                        <span>đ</span>
                                     </ins>
                                 </div>
                             </div>
@@ -253,354 +412,24 @@
                                 <div class="product-rating" style="with:100%;"></div>
                             </div>
                             <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                                <a class="add-to-cart" th:href="@{/cart}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
                                 <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
                                 <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="sanpham">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sanpham">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
 </div>
-
-<div class="container" style="padding-top:30px;">
-    <div class="content-wrap">
-        <div class="menu-big clearfix">
-            <h2 class="title18 col-sm-4">Xe đạp tập thể dục</h2>
-            <div class="list-big clearfix">
-                <ul class="list-none col-sm-8">
-                    <li><a href=""><span>Xe đạp tập thể dục</span></a></li>
-                    <li><a href=""><span>Xe đạp tập phục hồi chức năng</span></a></li>
-                    <li><a href=""><span>Xe đạp tập thể lực</span></a></li>
-                    <li><a href=""><span>Xe đạp tập toàn thân</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="big-box cleatfix">
-            <div class="box-left col-sm-8">
-                <div class="big-banner">
-                    <div class="banner-box">
-                        <a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2016/12/baner-xe-dap-tap-the-duc.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="sanpham sanpham1">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sanpham sanpham1">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sanpham sanpham1">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sanpham sanpham1">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="box-right col-sm-4">
-                <div class="sanpham">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sanpham">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sanpham">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sanpham">
-                    <div class="box-right-right col-sm-6"><a href=""><img src="https://sportonline.com.vn/wp-content/uploads/2017/09/may_chay_bo_dien_mht-1809AD-170x170.jpg" alt=""></a></div>
-                    <div class="box-right-left col-sm-6">
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <a href="">Máy chạy bộ đa năng MHT-1809AD</a>
-                            </h3>
-                            <div class="price-sale">
-                                <div class="product-price">
-                                    <del>
-                                        <span>20.800.000 đ</span>
-
-                                    </del>
-                                    <span class="sale-off5">-18%</span>
-                                    <ins class="after-sale">
-                                        <span>17.145.000 đ</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="product-rate">
-                                <div class="product-rating" style="with:100%;"></div>
-                            </div>
-                            <div class="product-extra-link">
-                                <a class="add-to-cart" href=""><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a class="add-to-cart" href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: footer(vm=${vm})"></div>
 
 <script type="text/javascript" th:src="@{/plugins/WOW-master/dist/wow.js}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script type="text/javascript" th:src = "@{/js/header.js}"></script>
 
 <script type="text/javascript">
     new WOW().init();

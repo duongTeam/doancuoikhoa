@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminNewsController {
-//    @Autowired
-//
-//
-//    @GetMapping(path = "/manage_news")
-//    public String newsAdmin() {
-//        return "admin/manage_news";
-//    }
+    @Autowired
+
+
+    @GetMapping(path = "/manage_news")
+    public String newsAdmin() {
+        return "admin/manage_news";
+    }
 
 }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -100,6 +101,69 @@ public class UserService {
         return getListRole().stream().filter(role -> {
             return (listUserRoles.stream().filter(userRole -> userRole.getRoleId() ==  role.getId()).findFirst().orElse(null) != null);
         }).collect(Collectors.toList());
+    }
+
+    public User findOne(int id){
+        return userRepository.findOne(id);
+    }
+
+    public String findRoleName(int userId) {
+        return roleRepository.findRoleById(userRoleRepository.findRoleIdByUserId(userId).getRoleId()).getName();
+    }
+
+    public ArrayList<UserRole> getUserRole() {
+        return userRoleRepository.getUserRole();
+    }
+
+    public User findUserById(int id) {
+        return userRepository.findUserById(id);
+    }
+
+    public Role findRoleById(int id) {
+        return roleRepository.findRoleById(id);
+    }
+
+    public UserRole findUserRole(int id) {
+        return userRoleRepository.findRoleIdByUserId(id);
+    }
+
+    public String getImage(String username) {
+        return userRepository.getImgByUserName(username);
+    }
+
+    public boolean updateRole(int userId) {
+        try {
+            UserRole userRole = new UserRole();
+            userRole = userRoleRepository.findRoleIdByUserId(userId);
+            if(userRole.getRoleId() == RoleIdConstant.Role_Admin) {
+                userRole.setRoleId(RoleIdConstant.Role_User);
+            }else if(userRole.getRoleId() == RoleIdConstant.Role_User){
+                userRole.setRoleId(RoleIdConstant.Role_Admin);
+            }
+            userRoleRepository.save(userRole);
+            return true;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean updateUser(User user) {
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return false;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return userRepository.getListUsers();
+    }
+
+    public User getOne(int userid) {
+        return userRepository.findOne(userid);
     }
 
 }
