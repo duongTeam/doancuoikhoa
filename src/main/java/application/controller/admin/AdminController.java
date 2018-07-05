@@ -12,6 +12,7 @@ import application.viewmodel.admin.AdminVM;
 import application.viewmodel.common.ProductVM;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@PreAuthorize("hasAnyRole('ADMIN')")
 @RequestMapping(path="/admin")
+
 public class AdminController extends BaseController{
 
     @Autowired
@@ -37,6 +40,8 @@ public class AdminController extends BaseController{
 
         AdminVM vm = new AdminVM();
         long totalProducts = productService.getTotalProducts();
+        ArrayList<Product> allProducts = productService.getAll();
+        vm.setListAllProducts(allProducts);
 
         vm.setMessageTotalProducts("Số sản phẩm hiện có: " + totalProducts);
 
