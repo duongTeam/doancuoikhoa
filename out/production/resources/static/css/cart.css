@@ -228,3 +228,16 @@ table #total {
 #myModal .modal-dialog .modal-content #thanks {
     display: none;
 }
+/*css for cart.html*/
+.your-cart-intro {
+    font-weight: bold;
+}
+
+.product-checkout th{
+    text-align: center;
+}
+
+.buymore-button, .checkout-button {
+    text-align: center;
+}
+

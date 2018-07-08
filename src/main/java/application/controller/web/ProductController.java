@@ -3,17 +3,19 @@ package application.controller.web;
 import application.data.model.Product;
 import application.data.service.ProductService;
 import application.model.ProductDetailModel;
+import application.model.ProductName;
 import application.viewmodel.productindex.ProductIndexVM;
+import application.viewmodel.productindex.ProductSearchVM;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping(path = "/product")
@@ -41,5 +43,24 @@ public class ProductController extends BaseController {
         }else {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
+    }
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String searchProduct(@ModelAttribute ProductName productName, BindingResult errors, Model model) {
+        ModelMapper modelMapper = new ModelMapper();
+        ProductSearchVM productSearchVM = new ProductSearchVM();
+        try {
+            ArrayList<Product> products = new ArrayList<>();
+            ArrayList<ProductDetailModel> productDetailModels = new ArrayList<>();
+            products =  productService.findByNameContaining(productName.getName());
+            for(Product p : products){
+                productDetailModels.add(modelMapper.map(p,ProductDetailModel.class));
+            }
+            productSearchVM.setKeyWord(productName.getName());
+            productSearchVM.setProductDetailModels(productDetailModels);
+            model.addAttribute("vm",productSearchVM);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "product/search";
     }
 }

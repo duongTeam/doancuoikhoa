@@ -69,6 +69,14 @@ public class ProductService {
         return false;
     }
 
+    public Product findByName(String name){
+        return productRepository.findByName(name);
+    }
+
+    public ArrayList<Product> findByNameContaining(String name){
+        return productRepository.findByNameContaining(name);
+    }
+
     public ArrayList<Product> getAll() {
         return productRepository.getAllProducts();
     }

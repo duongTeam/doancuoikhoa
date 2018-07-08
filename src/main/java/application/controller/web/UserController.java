@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping(path = "/register-user")
     public String register(Model model) {
         model.addAttribute("user",new User());
-        return "/login";
+        return "/register";
     }
 
     @RequestMapping(path = "/register-user", method = RequestMethod.POST)

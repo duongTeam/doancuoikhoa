@@ -169,4 +169,12 @@ public class HomeController extends BaseController {
         return "login";
     }
 
+    @GetMapping(path = "/contact")
+    public String contact(Model model){
+        LandingVM vm = new LandingVM();
+        this.setLayoutHeaderVM(vm);
+        model.addAttribute("vm",vm);
+        return "contact";
+    }
+
 }
