@@ -7,12 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Siêu thị thể thao Online</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/headerandfooter.css}"/>
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.19.3/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/plugins/WOW-master/css/libs/animate.css}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/headerandfooter.css}"/>
 </head>
 <body>
 <div th:fragment="header (vm)">
@@ -29,7 +32,7 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="#">Giới thiệu</a></li>
                     <li><a href="/news.html">Tin tức</a></li>
-                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="/contact.html">Liên hệ</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -70,16 +73,37 @@
                 </div>
 
                 <div class="column-container col-sm-5">
-                    <div id="custom-search-input">
-                        <div class="input-group col-md-12">
-                            <input type="text" class="form-control input-lg" placeholder="Nhập tên sản phẩm" />
-                            <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="button">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
+                    <form action="#" th:action="@{/product/search}" autocomplete="off" th:object="${product}" method="get" role="search">
+                        <!--<div >-->
+                            <!--<div class="input-group col-md-12">-->
+                                <!--<input type="text" class="form-control input-lg" placeholder="Nhập tên sản phẩm"/>-->
+                                <!--<span class="input-group-btn">-->
+                                    <!--<button class="btn btn-info btn-lg" type="button">-->
+                                        <!--<i class="glyphicon glyphicon-search"></i>-->
+                                    <!--</button>-->
+                                <!--</span>-->
+
+                            <!--</div>-->
+
+                        <!--</div>-->
+                        <div class="form-group">
+                            <section id="ajax-example">
+                                <div class="awesomplete">
+                                    <input placeholder="Tìm kiếm" name="name" class="form-control" type="text" autocomplete="off" aria-owns="awesomplete_list_6" role="combobox">
+                                    <ul role="listbox" id="awesomplete_list_6" hidden="">
+                                        <li aria-selected="false" id="awesomplete_list_6_item_0"><mark>Ca</mark>nada</li>
+                                        <li aria-selected="false" id="awesomplete_list_6_item_1"><mark>Ca</mark>meroon</li>
+                                        <li aria-selected="false" id="awesomplete_list_6_item_2">Madagas<mark>ca</mark>r</li>
+                                        <li aria-selected="false" id="awesomplete_list_6_item_3">New <mark>Ca</mark>ledonia</li>
+                                        <li aria-selected="false" id="awesomplete_list_6_item_4">Central Afri<mark>ca</mark>n Republic</li>
+                                    </ul>
+                                    <span class="visually-hidden" role="status" aria-live="assertive" aria-atomic="true" hidden="">No results found</span>
+                                </div>
+                                <button type="submit" value="Submit" class="btn btn-default search-button glyphicon glyphicon-search"></button>
+                            </section>
                         </div>
-                    </div>
+
+                    </form>
                 </div>
                 <div class="column-container col-sm-1">
                     <a th:href="@{./cart}" class="btn btn-info btn-lg">
